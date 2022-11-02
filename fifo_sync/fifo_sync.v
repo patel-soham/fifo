@@ -1,3 +1,4 @@
+// Synchronous FIFO design 
 module fifo_sync (
 // Common 
 clk_i,
