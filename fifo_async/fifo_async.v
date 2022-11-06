@@ -1,13 +1,30 @@
 // Asynchronous FIFO design 
+// Read and write operations happening on different clock
+/*
+INPUTS
+	1. wr_clk_i - Clock used by write interface.
+	2. rd_clk_i - Clock used by read interface.
+	3. rst_i - Reset.
+	4. wr_en_i - Write enable to initiate write operation.
+	5. rd_en_i - Read enable to initiate read operation.
+	6. wdata_i - Data bus for write operation.
+OUTPUTS
+	1. rdata_o - Data bus for read operation.
+	2. full_o - To indicate that FIFO is full
+	3. empty_o - To indicate that FIFO is empty
+	4. wr_error_o - To indicate that write operation failed.
+	5. rd_error_o - To indicate that read operation failed.
+*/
+
 module fifo_async (
 // Write interface
 wr_clk_i, rst_i, wr_en_i, wdata_i, full_o, wr_error_o, 
 // Read interface
 rd_clk_i, rd_en_i, rdata_o, empty_o, rd_error_o);
 
-parameter DEPTH=16, // Depth if FIFO
-		  WIDTH=8, // Data width on each location
-		  PTR_WIDTH=4; // Pointer width to address all locations (depth)
+parameter DEPTH=16, // Depth of FIFO
+	  WIDTH=8, // Data width on each location
+	  PTR_WIDTH=4; // Pointer width to address all locations (depth)
 
 input rd_clk_i, wr_clk_i, rst_i, wr_en_i, rd_en_i;
 input [WIDTH-1 : 0] wdata_i;
@@ -107,6 +124,8 @@ always @ (posedge rd_clk_i) begin
 	wr_toggle_f_rd_clk <= wr_toggle_f;
 end
 
+// Function to convert pointer values to gray code
+// To implement gray counting instead of regular binary counting to prevent glitch conditions
 function reg [PTR_WIDTH-1 : 0] bin2gray (input reg [PTR_WIDTH-1 : 0] bin);
 	begin
 		bin2gray = { bin[PTR_WIDTH-1], bin[PTR_WIDTH-1:1] ^ bin[PTR_WIDTH-2:0]  };
