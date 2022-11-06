@@ -7,13 +7,14 @@
 module tb;
 
 parameter DEPTH=16, // Depth if FIFO
-		  WIDTH=8, // Data width on each location
-		  PTR_WIDTH=4, // Pointer width to address all locations (depth)
-     	  	  RD_CLK_TP=14, // Time period of read interface clock
-		  WR_CLK_TP=10, // Time period of write interfsce clock
-		  MAX_RD_DELAY=10, // Maximum delay between 2 read cycles  
-		  MAX_WR_DELAY=14, // Maximum delay between 2 write cycles  
-		  NUM_TXS=100; // Number of read and write transactions
+	  WIDTH=8, // Data width on each location
+	  PTR_WIDTH=4, // Pointer width to address all locations (depth)
+	  RD_CLK_TP=14, // Time period of read interface clock
+	  WR_CLK_TP=10, // Time period of write interfsce clock
+	  MAX_RD_DELAY=10, // Maximum delay between 2 read cycles  
+	  MAX_WR_DELAY=14, // Maximum delay between 2 write cycles  
+	  NUM_TXS=100; // Number of read and write transactions
+	
 // Based on values of TP and MAX DELAY of both interfaces the write and read errors frequency will vary
 
 reg rd_clk_i, wr_clk_i, rst_i, wr_en_i, rd_en_i;
