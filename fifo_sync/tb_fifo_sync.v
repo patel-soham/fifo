@@ -2,9 +2,9 @@
 
 module tb;
 
-parameter DEPTH=16, // Depth if FIFO
-		  WIDTH=8, // Data width on each location
-		  PTR_WIDTH=4; // Pointer width to address all locations (depth)
+parameter DEPTH=16, // Depth of FIFO
+	  WIDTH=8, // Data width on each location
+	  PTR_WIDTH=4; // Pointer width to address all locations (depth)
 
 reg clk_i, rst_i, wr_en_i, rd_en_i;
 reg [WIDTH-1 : 0] wdata_i;
@@ -16,6 +16,7 @@ reg [30*8 : 1] testname;
 
 fifo_sync #(.DEPTH(DEPTH), .WIDTH(WIDTH), .PTR_WIDTH(PTR_WIDTH)) u0 (.clk_i(clk_i), .rst_i(rst_i), .wr_en_i(wr_en_i), .wdata_i(wdata_i), .full_o(full_o), .wr_error_o(wr_error_o), .rd_en_i(rd_en_i), .rdata_o(rdata_o), .empty_o(empty_o), .rd_error_o(rd_error_o));
 
+// Driving clock
 initial begin
 	clk_i = 0;
 	forever #1 clk_i = ~clk_i;
