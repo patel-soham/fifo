@@ -1,4 +1,20 @@
 // Synchronous FIFO design 
+// Read and write operations happening on same clock
+/*
+INPUTS
+	1. clk_i - Clock.
+	2. rst_i - Reset.
+	3. wr_en_i - Write enable to initiate write operation.
+	4. rd_en_i - Read enable to initiate read operation.
+	5. wdata_i - Data bus for write operation.
+OUTPUTS
+	1. rdata_o - Data bus for read operation.
+	2. full_o - To indicate that FIFO is full
+	3. empty_o - To indicate that FIFO is empty
+	4. wr_error_o - To indicate that write operation failed.
+	5. rd_error_o - To indicate that read operation failed.
+*/
+
 module fifo_sync (
 // Common 
 clk_i,
@@ -7,9 +23,9 @@ rst_i, wr_en_i, wdata_i, full_o, wr_error_o,
 // Read interface
 rd_en_i, rdata_o, empty_o, rd_error_o);
 
-parameter DEPTH=16, // Depth if FIFO
-		  WIDTH=8, // Data width on each location
-		  PTR_WIDTH=4; // Pointer width to address all locations (depth)
+parameter DEPTH=16, // Depth of FIFO
+	  WIDTH=8, // Data width on each location
+	  PTR_WIDTH=4; // Pointer width to address all locations (depth)
 
 input clk_i, rst_i, wr_en_i, rd_en_i;
 input [WIDTH-1 : 0] wdata_i;
