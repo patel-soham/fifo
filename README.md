@@ -1,4 +1,4 @@
-# FIFO using verilog
+# FIFO 
 A project to implement and test synchronous and asynchronous FIFO using Questasim software.
 - Design made 2 versions using Verilog: Synchronous and Asynchronous. Testbench made in 2 versions: System Verilog and Verilog.
 - Developed various test cases to verify empty, full, read error, write error and concurrent reads & writes through testbench.
